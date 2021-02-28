@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XOR cipher</title>
+    <style>
+        button:hover{
+            cursor: pointer;
+        }
+        textarea{
+            display: block;
+            width: 300px;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        #first{
+            width: 100px;
+            height: 30px;
+        }
+        #answer{
+            position: absolute;
+            top:30px;
+            left: 380px;
+            color: gray;
+            font-family: Bahnschrift;
+
+        }
+    </style>
+</head>
+<body>
+    <label>Cipher without first letter (copy paste first text in file)</label>
+    <textarea id="missed"></textarea>
+    <div></div>
+    <label>Cipher with first letter (second text)</label>
+    <textarea id="full"></textarea>
+    <input placeholder="first word" id="first">
+    <button id="btn">Get answer</button>
+    <div id="answer"></div>
+    <div style="position:absolute;bottom:15px;right:15px;color:silver;">By dremedys</div>
+<script >function inverse(obj) {
+    let retobj = {};
+    for (let key in obj) {
+        retobj[obj[key]] = key;
+    }
+    return retobj;
+}
+
+function zerox(num) {
+    return '0x' + num
+}
+
+function lol(num) {
+    return parseInt(Number(num), 10)
+}
+
+function getArrayFromText(text) {
+    return text.split(' ').map(zerox).map(lol)
+}
+
+function XOR(shorter, longer) {
+    let ans = []
+    for (let i = 0; i < shorter.length; i++) {
+        ans.push(shorter[i] ^ longer[i])
+    }
+    return ans
+}
+
+alphabet = { 'А': 0xc0, 'Б': 0xc1, 'В': 0xc2, 'Г': 0xc3, 'Д': 0xc4, 'Е': 0xc5, 'Ё': 0xa8, 'Ж': 0xc6, 'З': 0xc7, 'И': 0xc8, 'Й': 0xc9, 'К': 0xca, 'Л': 0xcb, 'М': 0xcc, 'Н': 0xcd, 'О': 0xce, 'П': 0xcf, 'Р': 0xd0, 'С': 0xd1, 'Т': 0xd2, 'У': 0xd3, 'Ф': 0xd4, 'Х': 0xd5, 'Ц': 0xd6, 'Ч': 0xd7, 'Ш': 0xd8, 'Щ': 0xd9, 'Ь': 0xdc, 'Ы': 0xdb, 'Ъ': 0xda, 'Э': 0xdd, 'Ю': 0xde, 'Я': 0xdf, 'а': 0xe0, 'б': 0xe1, 'в': 0xe2, 'г': 0xe3, 'д': 0xe4, 'е': 0xe5, 'ё': 0xb8, 'ж': 0xe6, 'з': 0xe7, 'и': 0xe8, 'й': 0xe9, 'к': 0xea, 'л': 0xeb, 'м': 0xec, 'н': 0xed, 'о': 0xee, 'п': 0xef, 'р': 0xf0, 'с': 0xf1, 'т': 0xf2, 'у': 0xf3, 'ф': 0xf4, 'х': 0xf5, 'ц': 0xf6, 'ч': 0xf7, 'ш': 0xf8, 'щ': 0xf9, 'ь': 0xfc, 'ы': 0xfb, 'ъ': 0xfa, 'э': 0xfd, 'ю': 0xfe, 'я': 0xff }
+
+function hm(){
+    let missedText = getArrayFromText(document.getElementById('missed').value)
+    let fullText = getArrayFromText(document.getElementById('full').value)
+    let firstWord = document.getElementById('first').value;
+    let xored = XOR(missedText, fullText)
+    let startIndex = firstWord.length - 1
+    let ans = []
+    for (let i = 0; i < firstWord.length; i++) {
+        ans.push(alphabet[firstWord[i]])
+    }
+
+    for (let i = startIndex; i < missedText.length; i++) {
+        ans.push(xored[i] ^ ans[(ans).length - 1])
+    }
+    const rev = inverse(alphabet)
+    let res = ''
+    for (let i = 0; i < ans.length; i++) {
+        if (ans[i] in rev) res += rev[ans[i]]
+        else if (ans[i] == 32) res += ' '
+        else if (ans[i] == 46) res += '.'
+        else res += '?'
+    }
+    document.getElementById('answer').innerText = 'Your answer is:\n\n'+ res
+
+}
+document.getElementById('btn').addEventListener('click',hm)
+</script>
+</body>
+</html>
