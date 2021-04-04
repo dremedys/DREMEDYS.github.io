@@ -2,94 +2,230 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LFSR</title>
+    <title>Title</title>
     <style>
-        body{
-            padding: 100px;
-        }
-        button:hover{
-            cursor: pointer;
-        }
-        textarea{
-            display: block;
-            width: 300px;
-            height: 150px;
-            margin-bottom: 10px;
-        }
-        #answer{
-            position: absolute;
-            top:30px;
-            left: 380px;
-            color: gray;
-            font-family: Bahnschrift;
-
+        p{
+            margin-left: 20px;
         }
     </style>
 </head>
 <body>
-    <label>Your task</label>
-    <input id="missed">
-    <div></div>
-    <input placeholder="register length" id="register">
-    <button id="btn">Get answer</button>
-    <div id="answer"></div>
+    <h1>Welcome to RSA</h1>
+    <label>Enter your text we'll work for you</label>
+    <input id="text" placeholder="text">
+    <button id="btn">DO</button>
+    <p id="start"></p>
+
+</body>
 <script>
-    function generateBinary(n){
-        let states = [];
-        let maxDecimal = parseInt("1".repeat(n),2);
-        for(let i = 0; i <= maxDecimal; i++){
-            states.push(i.toString(2).padStart(n,'0'));
-        }
-        return states;
+    const btn = document.getElementById('btn')
+    const text = document.getElementById('text')
+    let cnt = 1  //Шаги
+
+    //Adding HTML
+    function addText(txt){
+        let newDiv = document.createElement("p");
+        newDiv.innerHTML = `<p>${cnt}.${txt}</p>`;
+        cnt++
+        document.body.insertAdjacentElement("beforeend", newDiv);
     }
-    function checkOneRow(x,ans,Y){
-        let onesInRow = []
-        for(let i =0;i<x.length;i++){
-            if(parseInt(x[i])){
-                onesInRow.push(i)
-            }
-        }
-        let s = parseInt(ans[onesInRow.pop()])
-        for(let i = 0 ;i< onesInRow.length;i++){
-            s = s ^ parseInt(ans[onesInRow[i]])
-        }
-        return s == Y
-    }
-    function isRight(com,matrix,Y){
-        for(let i = 0; i< matrix.length;i++){
-            if(!checkOneRow(matrix[i],com,Y[i]))
-                return false
-        }
-        return true
+    function addTextImportant(txt){
+        let newDiv = document.createElement("p");
+        newDiv.innerHTML = `<h4>${cnt}.${txt}</h4>`;
+        cnt++
+        document.body.insertAdjacentElement("beforeend", newDiv);
     }
 
-    function hm(){
-        let s = document.getElementById('missed').value;
-        let registerLength = parseInt(document.getElementById('register').value)
-        let permuts = generateBinary(registerLength)
-        let matrix = []
-        let Y = []
-        for(let i = 0;i<registerLength;i++){
-            Y.push(parseInt(s[i+registerLength]))
-            matrix.push(s.slice(i,i+registerLength))
+    // Eratosphenes
+    function find_primes(m,n) {
+        addText('Ищу все простые числа через решето Эратосфена...')
+        let a = []
+        let p = new Array(100000).fill(0);
+
+        for (let i = 2; i * i <= n; i++) {
+            if (p[i] == 0) {
+                let k = i;
+                while (k + i <= n) {
+                    k += i;
+                    p[k] = 1;
+                }
+            }
         }
-        let ans;
-        for(let i = 0 ;i< permuts.length;i++)
+
+        for (let i = m; i <= n; i++)
+            if (p[i] == 0)
+                a.push(i)
+        return a
+    }
+
+    function randomFromArray(items){
+        addText('Беру рандомное число из этого решето..')
+        return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function gcd(a, h) {
+
+        let temp;
+        while(1) {
+            temp = a % h;
+            if(temp == 0){
+                addText( `Так, теперь они взаимно простые? GCD вышло ${h}..`)
+                return h;
+            }
+            a = h;
+            h = temp;
+        }
+
+    }
+
+    function power(x, y, p)
+    {addText(`Вычисляю ${x}^${y}mod(${p})...`)
+        // Initialize result
+        let res = 1;
+
+        x = x % p;
+
+        if (x == 0)
+            return 0;
+
+        while (y > 0)
         {
-            if(isRight(permuts[i],matrix,Y)){
-                ans=permuts[i]
-                break
-            }
-        }
-        let res = '';
-        for(let i = 0 ; i< ans.length;i++){
-            res+=`x[${registerLength-i}]: ${ans[i]}\n`
-        }
-        document.getElementById('answer').innerText = 'Your answer is:\n\n'+ res
+            // If y is odd, multiply
+            // x with result
+            if (y & 1)
+                res = (res * x) % p;
 
+            // y must be even now
+
+            // y = $y/2
+            y = y >> 1;
+            x = (x * x) % p;
+        }
+        return res;
     }
-    document.getElementById('btn').addEventListener('click',hm)
+
+    class Rsa {
+        constructor() {
+            addText('Давайте придумаем свои RSA ключи.Нужны два простые числа p q.')
+            this.p = randomFromArray(find_primes(100, 1000))
+            addTextImportant('Хорошо,наш p =  '+this.p)
+            this.q = randomFromArray(find_primes(100, 1000))
+            addTextImportant('Хорошо,наш q =  '+this.q)
+            this.multiple = this.p * this.q
+            addTextImportant('Вычислим n = pq =  '+this.multiple)
+            this.euler = (this.p - 1) * (this.q - 1)
+            addTextImportant(`Вычислим Эйлера (${this.p}-1)*(${this.q}-1) = `+this.euler)
+            this.e = this.generateE()
+            this.d = this.generate_d()
+            addTextImportant(`Open key: [e = ${this.e} , n = ${this.multiple}]`)
+            addTextImportant(`Private key: [d = ${this.d} , n = ${this.multiple}]`)
+
+
+        }
+
+        generateE() {
+            addText('Давайте найдем е . Критерии: простое, меньше Эйлера ,взаимно простые с Эйлером.Изначально предположим что он 2')
+            let e = 2
+            let count = 0
+            addText('Будет у нас переменная count. Просто gcd будем там хранить.')
+            let totient = this.euler
+            //for checking co-prime which satisfies e>1
+            addText('Будем менять е пока этот count не будет 1,то есть gcd')
+            while (e < totient) {
+                addText(   `Сейчас e = ${e} давайте найдем gcd(e,Эйлера) = gcd(${e},${totient})`)
+                count = gcd(e, totient);
+                if (count == 1){
+                    addTextImportant('То что нам нужно было,закончим поиски е')
+                    break;
+                }
+                else{
+                    e++;
+                    addText('Чет не взаимно простые числа,идем дальше е++')
+                }
+            }
+            return e
+        }
+
+        //ax  ≅ 1 (mod m)
+        // ax mod m = 1
+        // ed mod euler = 1
+        //a=e m=euler
+        generate_d() {
+            addTextImportant('Давайте найдем d. Просто решаю уравнение,  ed mod euler = 1')
+            let euler = this.euler
+            let e = this.e
+            let m0 = euler;
+            let y = 0;
+            let x = 1;
+
+            if (euler == 1)
+                return 0;
+
+            while (e > 1)
+            {
+
+                // q is quotient
+                let q = parseInt(e / euler);
+                let t = euler;
+
+                // m is remainder now,
+                // process same as
+                // Euclid's algo
+                euler = e % euler;
+                e = t;
+                t = y;
+
+                // Update y and x
+                y = x - q * y;
+                x = t;
+            }
+
+            // Make x positive
+            if (x < 0)
+                x += m0;
+            addText('d вышло '+ x)
+            return x;
+        }
+
+
+        encryptChar(c){
+            addText(`Encrypting process of your char ${c}...It is (${c.charCodeAt()}^${this.e})mod${this.multiple} = ${String.fromCharCode(power(c.charCodeAt(0),this.e,this.multiple))}`)
+            return String.fromCharCode(power(c.charCodeAt(0),this.e,this.multiple))
+        }
+        decryptChar(c){
+            addText(`Decrypting process of your char ${c}...It is (${c.charCodeAt()}^${this.d})mod${this.multiple} = ${String.fromCharCode(power(c.charCodeAt(0),this.d,this.multiple))}`)
+            return String.fromCharCode(power(c.charCodeAt(0),this.d,this.multiple))
+        }
+        encryptText(text){
+            addTextImportant('Процесс шифровки начался...')
+            let answer = ""
+            for(let i = 0 ; i < text.length;i++){
+                answer += this.encryptChar(text[i])
+            }
+            addTextImportant('У нас вышел шифр '+ answer)
+            addTextImportant('Давайте расшифруем опять '+ answer)
+            return answer
+        }
+        decryptText(text){
+            addTextImportant('Процесс расшифровки начался...')
+            let answer = ""
+            for(let i = 0 ; i < text.length;i++){
+                answer+= this.decryptChar(text[i])
+                answer += ' '
+            }
+            return answer
+        }
+    }
+    function render(){
+        addTextImportant('Сейчас мы сгенерируем ключи,а потом зашифруем ею ваш текст и расшифруем')
+
+        const rsa = new Rsa()
+        addTextImportant('Ответ -  '+rsa.decryptText(rsa.encryptText(text.value)))
+    }
+
+    btn.addEventListener('click',render)
+
+
 
 </script>
-</body>
 </html>
