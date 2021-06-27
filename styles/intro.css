@@ -1,0 +1,263 @@
+.intro {
+    background: #232743;
+    color: #FFFFFF;
+    height: 100%;
+    overflow: hidden;
+}
+.intro-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+.phones{
+    flex: 1 1 50%;
+    position: relative;
+    margin-top: 4%;
+}
+.phones__item {
+    z-index: 100;
+    position: relative;
+}
+.download{
+    display: flex;
+}
+.main-info{
+    display: flex;
+    flex: 1 1 50%;
+    padding-left: 1%;
+    padding-right: 3%;
+}
+.nav-dialog{
+    display: none;
+}
+.main-info__text h2{
+    margin-bottom: 20px;
+}
+.main-info__text p{
+    line-height: 130%;
+}
+.main-info__text .download{
+    margin-top: 20px;
+}
+.orange-circle{
+    background: linear-gradient(101.89deg, #F7931A 14.87%, #F44336 99.18%);
+    border-radius: 50%;
+    position: absolute;
+}
+
+@media only screen and (min-width: 320px){
+    .orange-circle{
+        left: 50%;
+        width: 120%;
+        transform: translate(-50%, 0) ;
+        overflow: hidden;
+        top: 1%
+    }
+    .phones .phone-1{
+        display: none;
+    }
+    .phones .phone-2{
+        margin-top: 3%;
+        margin-left: -20%;
+    }
+    .phones .phone-3{
+        margin-top: -24%;
+        margin-left: -25%;
+    }
+    .main-info{
+        width: 100%;
+    }
+    .nav-bar-toggler{
+        display: block;
+        position: absolute;
+        right: 30px;
+    }
+    .intro-wrapper{
+        flex-direction: column-reverse;
+    }
+    .main-info__wrapper{
+        padding-top: 8%;
+        padding-left: 5%;
+        padding-right: 5%;
+        position: relative;
+    }
+    .download {
+        margin-top: 10px;
+    }
+    .download__item a img{
+        min-width: 100%;
+    }
+    .download__item.play-market a img{
+        width: 112px;
+        height: 33px;
+    }
+    .download__item.app-store a img{
+        width: 100px;
+        height: 33px;
+    }
+    .play-market{
+        margin-right: 20px;
+    }
+    .main-info__text h2{
+        font-size: 24px;
+    }
+    .main-info__text p{
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    /** Navigation modal **/
+    .nav-dialog{
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 600ms ease-in-out, visibility 1s ease-in;
+        position:absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(35, 39, 67)  ;
+        z-index: 100;
+        justify-content: center;
+        align-items: center;
+    }
+    .nav-dialog__inner{
+        width: 90%;
+        height: 80%;
+        margin: 0 auto;
+    }
+    .nav-dialog__close{
+        position: absolute;
+    }
+    .nav-dialog__inner div:first-child{
+        border-top: 1px solid silver;
+        border-bottom:  1px solid silver;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .nav-dialog__inner div:last-child{
+        border-bottom:  1px solid silver;
+        margin-bottom: 0;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .nav-dialog__inner a {
+        font-size: 1.2rem;
+    }
+    .nav-dialog__inner hr{
+        width: 100%;
+    }
+
+}
+
+@media screen and (min-width: 768px){
+    .orange-circle{
+        left: 15%;
+    }
+    .play-market{
+        margin-right: 27px;
+    }
+    .download__item.play-market a img{
+        width: 165px;
+        height: 48px;
+    }
+    .download__item.app-store a img{
+        width: 146px;
+        height: 48px;
+    }
+    .intro-wrapper{
+        flex-direction: row;
+    }
+    .nav-bar-toggler{
+        display: none;
+    }
+    .phones .phone-2{
+        margin-left: -45%;
+        margin-top: 30px;
+    }
+    .phones .phone-3{
+        margin: -25% 0 -15% -55%;
+    }
+    .main-info__text h2{
+        font-size: 36px;
+    }
+    .main-info__text p{
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .phones .phone-2{
+        margin-left: -40%;
+        margin-top: 0;
+    }
+    .phones .phone-3{
+        margin: -25% 0 -10% -40%;
+    }
+    .main-info__text h2{
+        font-size: 48px;
+    }
+    .main-info__text p{
+        font-size: 20px;
+    }
+
+}
+@media screen and (min-width: 1440px){
+    .orange-circle{
+        left: 9%;
+    }
+    .download__item.play-market a img{
+        width: 223px;
+        height: 66px;
+    }
+    .download__item.app-store a img{
+        width: 196px;
+        height: 66px;
+    }
+    .phones .phone-1{
+        display: block;
+    }
+    .phones .phone-1{
+        margin: -48% 0 0 -700px;
+    }
+    .phones .phone-2{
+        margin: -150px 0 0 -450px;
+    }
+
+    .phones .phone-3{
+        margin: -200px 0 -150px -482px;
+    }
+    .main-info{
+        width: 50%;
+    }
+    .main-info__text h2{
+        font-size: 64px;
+    }
+    .main-info__text p{
+        font-size: 24px;
+    }
+
+}
+
+@media screen and (min-width: 1920px){
+    .phones .phone-1{
+        margin: -40% 0 0 -500px;
+    }
+    .phones .phone-2{
+        margin: -20% 0 0 -90px;
+    }
+    .phones .phone-3 {
+        margin: -20% 0 -10% -90px;
+    }
+    .main-info__text h2{
+        font-size: 72px;
+        margin-bottom: 20px;
+    }
+    .main-info__text p{
+        font-size: 28px;
+        line-height: 130%;
+    }
+}

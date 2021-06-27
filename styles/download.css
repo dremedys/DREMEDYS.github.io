@@ -1,0 +1,115 @@
+.download-now {
+    background: linear-gradient(101.89deg, #F7931A 14.87%, #F44336 99.18%);
+}
+
+.download-now{
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.download-now__text {
+    align-self: center;
+    color: #FFFFFF;
+}
+.download-now__phones{
+   display: flex;
+}
+.download-now__phones img{
+    display: block;
+}
+@media only screen and (min-width: 320px) {
+    .download-now {
+        flex-direction: column;
+    }
+    .download-now__phones{
+        margin-bottom: -17%;
+        align-self: center;
+    }
+    .download-now__phones img {
+        width: 288px;
+    }
+    .download-now__text h2{
+        font-size: 24px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .download-now__text p{
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .download-now__text .download{
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .download-now {
+        flex-direction: row;
+    }
+    .download-now__phones{
+        margin-bottom: -8%;
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+    .download-now__phones img{
+    }
+    .download-now__phones img {
+        width: 402px;
+    }
+    .download-now__text h2{
+        font-size: 24px;
+    }
+    .download-now__text p{
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+@media screen and (orientation: portrait) and (min-width: 768px){
+    .download-now {
+        flex-direction: column;
+    }
+    .download-now__phones{
+        align-self: center;
+        display: block;
+        justify-self: flex-end;
+        margin-bottom: -11%;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .download-now__phones{
+        margin-bottom: -7%;
+    }
+    .download-now__phones img {
+        width: 402px;
+    }
+    .download-now__text h2{
+        font-size: 36px;
+    }
+    .download-now__text p{
+        font-size: 24px;
+        font-weight: 500;
+    }
+}
+@media screen and (min-width: 1440px){
+    .download-now__phones{
+        margin-bottom: -6.5%;
+    }
+    .download-now__phones img {
+        width: 610px;
+    }
+    .download-now__text h2{
+        font-size: 48px;
+    }
+    .download-now__text p{
+        font-size: 36px;
+        font-weight: 500;
+    }
+}
+
+@media screen and (min-width: 1980px){
+    .download-now__phones{
+        margin-bottom: -6.5%;
+    }
+}
+

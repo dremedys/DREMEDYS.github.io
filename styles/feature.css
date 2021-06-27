@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100&display=swap');
+.features{
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 20px;
+}
+.feature {
+    display: flex;
+    align-items: center;
+}
+
+.features__text-wide ul li {
+    display: flex;
+    align-items: center;
+}
+.feature {
+    width: 100%;
+    justify-content: space-evenly;
+    height: 100%;
+}
+.feature > *{
+    flex:1;
+}
+.features__text-wide {
+    display: block;
+    font-family: Sarabun, sans-serif;
+}
+.features__text-wide > * {
+    margin-bottom: 15px;
+}
+.features__text-wide h3{
+    font-weight: bold;
+    font-family: Ubuntu, serif;
+}
+.features__text-wide ul li{
+    margin-bottom: 20px;
+}
+.features__text-wide button{
+    border: none;
+    border-radius: 6px;
+    width: 343px;
+    height: 48px;
+    font-weight: 700;
+    background: linear-gradient(101.89deg, #F7931A 14.87%, #F44336 99.18%);
+    color: #FFFFFF;
+}
+.feature__listing-icon{
+    width: 8px;
+    height: 8px;
+    background: #A6ACBE;
+    display: block;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+@media only screen and (min-width: 320px){
+    .feature {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .features__text-wide {
+        display: none;
+    }
+    .features__text-mobile {
+        display: block;
+        text-align: center;
+        width: 70%;
+    }
+    .features__text-mobile h3{
+        margin-bottom: 10px;
+    }
+    .feature__image {
+        width: 288px;
+    }
+    .features__text-mobile p{
+        font-size: 16px;
+    }
+    .features__text-mobile h3 {
+        font-size: 24px;
+    }
+}
+@media screen and (min-width: 768px){
+    .feature:nth-child(odd) {
+        flex-direction: row;
+    }
+    .feature:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    .features__text-wide {
+        display: block;
+    }
+    .features__text-mobile {
+        display: none;
+    }
+    .features__text-wide{
+        font-size: 18px;
+    }
+    .features__text-wide h3 {
+        font-size: 24px;
+    }
+}
+@media screen and (min-width: 1024px){
+    .features__text-wide{
+        font-size: 18px;
+    }
+    .features__text-wide h3 {
+        font-size: 36px;
+    }
+}
+@media screen and (min-width: 1440px){}
+
+@media screen and (min-width: 1920px){
+
+    .features__text-wide{
+        font-size: 24px;
+    }
+    .features__text-wide h3 {
+        font-size: 48px;
+    }
+}
