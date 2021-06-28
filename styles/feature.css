@@ -40,6 +40,8 @@
     border-radius: 6px;
     width: 343px;
     height: 48px;
+    font-family: Ubuntu, serif;
+    font-size: 20px;
     font-weight: 700;
     background: linear-gradient(101.89deg, #F7931A 14.87%, #F44336 99.18%);
     color: #FFFFFF;

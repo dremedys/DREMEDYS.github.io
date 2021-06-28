@@ -12,7 +12,7 @@
     color: #FFFFFF;
 }
 .download-now__phones{
-   display: flex;
+
 }
 .download-now__phones img{
     display: block;
@@ -49,6 +49,7 @@
     .download-now__phones{
         margin-bottom: -8%;
         flex: 1 1 auto;
+        display: flex;
         justify-content: center;
     }
     .download-now__phones img{

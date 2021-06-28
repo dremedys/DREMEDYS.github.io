@@ -188,7 +188,8 @@
 
 <section class="download-now" id="download-now">
     <div class="download-now__text">
-      <h2>Загрузить приложение Bitseven Wallet
+      <h2>Загрузить приложение <br>
+        Bitseven Wallet
 
       </h2>
       <p>прямо сейчас</p>
@@ -237,10 +238,22 @@
     }
     modalNavOpen = !modalNavOpen
   })
-  const circle = document.querySelector('.orange-circle')
-  const width = circle.getBoundingClientRect().width
-  circle.style.height = width + 'px'
+  function computeHeight() {
+    const circle = document.querySelector('.orange-circle')
+    const width = circle.getBoundingClientRect().width
+    circle.style.height = width + 'px'
+  }
+  window.onload = computeHeight
+  window.onresize = computeHeight
 
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
 
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
 </script>
 </html>
