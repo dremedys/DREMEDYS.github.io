@@ -50,11 +50,9 @@
     width: 8px;
     height: 8px;
     background: #A6ACBE;
-    display: block;
+    /*display: block;*/
     border-radius: 50%;
     margin-right: 10px;
-    display: flex;
-    justify-content: center;align-items: center;
 }
 @media only screen and (min-width: 320px){
     .feature {
@@ -65,10 +63,17 @@
     .features__text-wide {
         display: none;
     }
-    .features__text-mobile ul li {
-        display: flex;
+    .features__text-mobile ul li span{
+        /*display: flex;*/
+        /*vertical-align: middle;        display: table-cell;*/
+
+
     }
     .features__text-mobile ul li {
+        /*vertical-align: middle;*/
+        /*display: inline-block;*/
+
+
 
     }
     .features__text-mobile {

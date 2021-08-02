@@ -19,6 +19,7 @@
 }
 .download{
     display: flex;
+    list-style: none;
 }
 .main-info{
     display: flex;
