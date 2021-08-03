@@ -22,9 +22,7 @@
     margin-right: 5px;
 }
 
-.footer__policy {
 
-}
 
 @media only screen and (min-width: 320px){
     .footer{
@@ -39,10 +37,15 @@
     .footer__rights{
         font-size: 12px;
     }
+    .footer__policy {
+        margin-top: 5px;
+    }
 }
 
 @media only screen and (min-width: 768px){
-
+    .footer__policy {
+        margin-top: 0;
+    }
 }
 
 @media only screen and (min-width: 1024px){
