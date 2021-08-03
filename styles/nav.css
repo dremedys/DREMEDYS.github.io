@@ -37,9 +37,7 @@ img{
     flex: 1 1 50%;
 }
 
-.brand-name__logo{
-    margin-right: 32px;
-}
+
 
 .brand-name__title {
     display: inline;
@@ -61,8 +59,16 @@ img{
     .brand-name h3{
         font-size: 20px;
     }
+    .brand-name {
+        display: flex;
+        align-items: center;
+    }
+
     .brand-name__logo{
         width: 27px;
+    }
+    .brand-name__logo{
+        margin-right: 15px;
     }
     .main_nav {
         padding-top: 5%;
